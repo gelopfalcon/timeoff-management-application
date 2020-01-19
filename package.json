@@ -21,6 +21,7 @@
     "html-to-text": "^3.2.0",
     "ical-generator": "^0.2.7",
     "joi": "~12.0.0",
+    "kill-port": "^1.6.0",
     "ldapauth-fork": "^4.0.2",
     "moment": "^2.11.2",
     "moment-timezone": "^0.5.14",
@@ -33,6 +34,7 @@
     "passport": "^0.3.2",
     "passport-http-bearer": "^1.0.1",
     "passport-local": "^1.0.0",
+    "phantomjs": "^2.1.7",
     "sequelize": "^3.19.2",
     "sequelize-cli": "2.5.1",
     "serve-favicon": "^2.1.7",
@@ -43,6 +45,7 @@
   },
   "devDependencies": {
     "chai": "^2.2.0",
+    "eslint": "^6.8.0",
     "mocha": "^6.2.2",
     "node-sass": "^4.5.3",
     "request-promise": "^4.2.2",
