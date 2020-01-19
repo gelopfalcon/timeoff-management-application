@@ -6,8 +6,7 @@ pipeline {
                 echo "Step 1: Installing dependencies"
                 sh 'npm ci'
                 echo "Step 2: Running Test"
-                sh 'npm start'
-                sh 'npm test'
+                sh 'npm start | npm test'
                 sh 'kill $(lsof -t -i:3000)'
             }
 
