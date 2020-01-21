@@ -26,7 +26,8 @@ RUN apk add --no-cache \
     make \
     nodejs npm \
     python \
-    vim
+    vim \
+    sqlite
     
 RUN adduser --system app --home /app
 USER app
