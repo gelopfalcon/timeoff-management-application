@@ -29,6 +29,6 @@ spec:
     spec:
       containers:
       - name: timeoff
-        image: glgelopfalcon/timeoff:21
+        image: glgelopfalcon/timeoff:23
         ports:
         - containerPort: 3000
