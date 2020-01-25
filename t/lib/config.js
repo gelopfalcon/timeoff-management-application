@@ -9,7 +9,7 @@
 
 module.exports = {
   get_application_host : function(){
-    return `http://34.67.15.23/:${ process.env.PORT || 3000}/`;
+    return `http://34.67.15.23:${ process.env.PORT || 3000}/`;
   },
 
   /*
