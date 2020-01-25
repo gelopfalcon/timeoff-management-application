@@ -18,7 +18,8 @@ pipeline {
                     sh 'docker run -dp 3000:3000 --name timeoff glgelopfalcon/timeoff:${BUILD_NUMBER}'
                     echo "Step 2: Running INT test"
                     sh 'npm test'
-                    sh 'docker kill timeoff'
+                    sh 'docker stop timeoff'
+                    sh 'docker rm timeoff'
             }
          }   
         }
