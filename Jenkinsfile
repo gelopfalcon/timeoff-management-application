@@ -9,7 +9,7 @@ pipeline {
 
         }
 
-        stage('Build and install') {
+        stage('Running test') {
             steps {
                 echo "Step 1: Test"
                 sh 'npm test'
@@ -25,7 +25,7 @@ pipeline {
                     sh 'docker build -t glgelopfalcon/timeoff:${BUILD_NUMBER} .'
                     sh 'docker push glgelopfalcon/timeoff:${BUILD_NUMBER}'
             }
-         }   
+         }
         }
 
         stage('Deploy') {
