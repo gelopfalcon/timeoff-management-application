@@ -1,7 +1,7 @@
 pipeline {
     agent any
     stages {
-        stage('Build') {
+        stage('Build and install') {
             steps {
                 echo "Step 1: Installing dependencies"
                 sh 'npm ci'
@@ -9,19 +9,31 @@ pipeline {
 
         }
 
-        stage('Build image and Test') {
+        stage('Build and install') {
+            steps {
+                echo "Step 1: Test"
+                sh 'npm test'
+            }
+
+        }
+
+        stage('Build image and push') {
             steps {
                 withCredentials([usernamePassword(credentialsId: 'docker-registry', usernameVariable: 'USERNAME', passwordVariable: 'PASSWORD')]) {
                     sh ' echo "$PASSWORD" | docker login --username=$USERNAME --password-stdin'
                     echo "Step 1: Build Docker image"
                     sh 'docker build -t glgelopfalcon/timeoff:${BUILD_NUMBER} .'
-                    sh 'docker run -dp 3000:3000 --name timeoff glgelopfalcon/timeoff:${BUILD_NUMBER}'
-                    echo "Step 2: Running INT test"
-                    sh 'npm test'
-                    sh 'docker stop timeoff'
-                    sh 'docker rm timeoff'
+                    sh 'docker push glgelopfalcon/timeoff:${BUILD_NUMBER}'
             }
          }   
         }
+
+        stage('Deploy') {
+            steps {
+                sh 'kubectl config view'
+                sh 'sudo kubectl config set-context $(kubectl config current-context) --namespace development'
+                sh 'sudo kubectl apply -f  time-off-deployment.yml'
+            }
+        } 
     }
 }

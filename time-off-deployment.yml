@@ -1,0 +1,34 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: timeoff-service
+  labels:
+    app: timeoff
+spec:
+  type: LoadBalancer 
+  ports:
+  - port: 3000
+    targetPort: 3000
+    protocol: TCP
+  selector:
+    app: timeoff
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata: 
+  name: timeoff-deployment
+spec:
+  selector: 
+    matchLabels: 
+      app: timeoff
+  replicas: 2 # tells deployment to run 2 pods matching the template 
+  template:
+    metadata:
+      labels:
+        app: timeoff
+    spec:
+      containers:
+      - name: timeoff
+        image: glgelopfalcon/timeoff:20
+        ports:
+        - containerPort: 3000
