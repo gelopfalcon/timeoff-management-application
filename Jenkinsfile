@@ -14,7 +14,6 @@ pipeline {
                 echo "Step 1: Test"
                 sh 'npm test'
             }
-
         }
 
         stage('Build image and push') {
@@ -30,8 +29,8 @@ pipeline {
 
         stage('Deploy') {
             steps {
-                sh 'kubectl config view'
                 sh 'sudo kubectl config set-context $(kubectl config current-context) --namespace development'
+                sh 'sed -i "s/\/glgelopfalcon/timeoff:.*/\/glgelopfalcon/timeoff:${BUILD_NUMBER}/" time-off-deployment.yml'
                 sh 'sudo kubectl apply -f  time-off-deployment.yml'
             }
         } 
